@@ -95,6 +95,18 @@ class TabView extends PureComponent<void, Props, void> {
     }
     return route.routeName;
   };
+  
+  _getTestID = ({ route }: TabScene) => {
+    const tabBar = this.props.router.getScreenConfig(this.props.childNavigationProps[route.key], 'tabBar');
+    if (tabBar && typeof tabBar.testID !== 'undefined') {
+      return tabBar.testID;
+    }
+    const title = this.props.router.getScreenConfig(this.props.childNavigationProps[route.key], 'testID');
+    if (typeof title === 'string') {
+      return title;
+    }
+    return route.routeName;
+  };
 
   _renderIcon = ({ focused, route, tintColor }: TabScene) => {
     const tabBar = this.props.router.getScreenConfig(this.props.childNavigationProps[route.key], 'tabBar');
@@ -121,6 +133,7 @@ class TabView extends PureComponent<void, Props, void> {
         {...props}
         {...tabBarOptions}
         getLabelText={this._getLabelText}
+        getTestID={this._getTestID}
         renderIcon={this._renderIcon}
         animationEnabled={animationEnabled}
       />

@@ -36,6 +36,7 @@ type Props = {
   navigationState: NavigationState;
   jumpToIndex: (index: number) => void;
   getLabelText: (scene: TabScene) => string;
+  getTestID: (scene: TabScene) => string;
   renderIcon: (scene: TabScene) => React.Element<*>;
   showLabel: boolean;
   style?: Style;
@@ -123,7 +124,7 @@ export default class TabBarBottom extends PureComponent<DefaultProps, Props, voi
       jumpToIndex,
       activeBackgroundColor,
       inactiveBackgroundColor,
-      style,
+      style
     } = this.props;
     const { routes } = navigationState;
     // Prepend '-1', so there are always at least 2 items in inputRange
@@ -141,8 +142,9 @@ export default class TabBarBottom extends PureComponent<DefaultProps, Props, voi
             outputRange,
           });
           const justifyContent = this.props.showIcon ? 'flex-end' : 'center';
+          const testID = this.props.getTestID(scene);
           return (
-            <TouchableWithoutFeedback key={route.key} onPress={() => jumpToIndex(index)}>
+            <TouchableWithoutFeedback testID={testID} key={route.key} onPress={() => jumpToIndex(index)}>
               <Animated.View style={[styles.tab, { backgroundColor, justifyContent }]}>
                 {this._renderIcon(scene)}
                 {this._renderLabel(scene)}

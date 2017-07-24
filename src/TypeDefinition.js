@@ -129,6 +129,7 @@ export type HeaderConfig = {
    * Style passed into navigation bar title
    */
   titleStyle?: Style,
+  testID?: string
 
   // // Style of title text
   // titleTextStyle?: $NavigationThunk<Object>,
@@ -173,6 +174,8 @@ export type NavigationScreenOptions = {
    * or on web as the title of the browser tab.
    */
   title?: NavigationScreenOption<string>;
+
+  testID?: NavigationScreenOption<string>;
   /**
    * Options passed to the navigation bar for this screen.
    */
@@ -192,6 +195,7 @@ export type NavigationScreenConfig = {
   header?: HeaderConfig,
   tabBar?: TabBarConfig,
   drawer?: DrawerConfig;
+  testID?: string
 };
 
 export type NavigationComponent = NavigationScreenComponent<*> | NavigationNavigator<*>;
